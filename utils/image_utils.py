@@ -1,0 +1,24 @@
+import numpy as np
+import cv2
+import torch
+
+
+def load_img(filepath):
+    img = cv2.cvtColor(cv2.imread(filepath), cv2.COLOR_BGR2RGB)
+    return img.astype(np.float32) / 255.
+
+
+def save_img(filepath, img):
+    cv2.imwrite(filepath, cv2.cvtColor(img, cv2.COLOR_RGB2BGR))
+
+
+def torchPSNR(tar_img, prd_img):
+    imdff = torch.clamp(prd_img, 0, 1) - torch.clamp(tar_img, 0, 1)
+    rmse = (imdff ** 2).mean().sqrt()
+    return 20 * torch.log10(1 / rmse)
+
+
+def numpyPSNR(tar_img, prd_img):
+    imdff = np.float32(prd_img) - np.float32(tar_img)
+    rmse = np.sqrt(np.mean(imdff ** 2))
+    return 20 * np.log10(255 / rmse)
