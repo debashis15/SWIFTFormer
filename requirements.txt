@@ -1,0 +1,16 @@
+torch>=1.11
+torchvision
+numpy
+opencv-python
+scikit-image
+pillow
+einops
+pyyaml
+tqdm
+natsort
+matplotlib
+pytorch-wavelets
+PyWavelets
+lpips           # LPIPS metric (paired evaluation)
+pyiqa           # NIQE metric (unpaired evaluation)
+thop            # parameter / MACs profiling
