@@ -1,0 +1,27 @@
+# SWIFTFormer training configuration -- SWIFTFormer_LOLv2_Synthetic
+
+MODEL:
+  IN_CHANNELS: 3
+  OUT_CHANNELS: 3
+  DIM: 36
+  NUM_BLOCKS: [2, 3, 3, 4]
+  NUM_REFINEMENT_BLOCKS: 4
+  HEADS: [1, 2, 4, 8]
+  FFN_EXPANSION_FACTOR: 2.85
+  WAVE: db4            # four-tap Daubechies basis (paper default)
+
+OPTIM:
+  BATCH_SIZE: 8
+  NUM_EPOCHS: 2200       # ~2.5e5 iterations
+  LR_INITIAL: 2e-4
+  LR_MIN: 1e-6
+
+TRAINING:
+  TRAIN_PS: 128        # random crop patch size
+  TRAIN_DIR: ./datasets/LOLv2/Synthetic/train  # contains low/ and high/
+  VAL_DIR: ./datasets/LOLv2/Synthetic/test     # contains low/ and high/
+  SAVE_DIR: ./checkpoints/SWIFTFormer_LOLv2_Synthetic
+  SEED: 1234
+  NUM_WORKERS: 8
+  VAL_AFTER_EVERY: 1
+  RESUME: false
